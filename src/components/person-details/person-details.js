@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './person-details.css';
 import SwapiService from "../../services/swapi-service";
-import Spinner from "../spiner";
+import ErrorButton from "../error-button";
 
 export default class PersonDetails extends Component {
 
@@ -54,29 +54,19 @@ export default class PersonDetails extends Component {
       return <span>Select a person from a list</span>
     }
 
-    const spinner = loading ? <Spinner className="spinner"/> : null;
-    const content = !loading ? <PersonView person={person}/> : null;
+    const { id, name, birthYear, gender, homeworld, skinColor,
+      height, mass, hairColor, eyeColor
+    } = this.state.person;
 
     return (
       <div className="person-details card">
-        {spinner}
-        {content}
-      </div>
-    )
-  }
-}
-
-const PersonView = ({person}) => {
-
-  const { id, name, birthYear, gender, skinColor,
-    height, mass, hairColor, eyeColor } = person;
-
-  return (
-      <React.Fragment>
-        <img className="person-image"
-             src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
-             alt={`Character: ${name}`}
-        />
+        <div className="left-col">
+          <img className="person-image"
+               src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
+               alt={`Character: ${name}`}
+          />
+          <ErrorButton className="error-button" />
+        </div>
 
         <div className="card-body">
           <h4>{name}</h4>

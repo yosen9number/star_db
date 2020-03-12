@@ -4,10 +4,18 @@
   padding: 1rem;
 }
 
-.person-details .person-image {
+.person-details .left-col {
   width: 30%;
   height: 30%;
+}
+.person-details .person-image {
+  width: 100%;
   border-radius: 10px;
+}
+
+.person-details .error-button {
+  display: block;
+  margin-top: 20px;
 }
 
 .person-details .list-group-item {
@@ -17,3 +25,4 @@
 .person-details .list-group-item .term{
   margin-right: .5rem;
 }
+
