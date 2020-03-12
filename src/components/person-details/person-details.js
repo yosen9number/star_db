@@ -9,12 +9,25 @@ export default class PersonDetails extends Component {
   swapiService = new SwapiService();
 
   state = {
-    person: null
+    person: null,
+    loading: true
   };
 
   componentDidMount () {
     this.updatePerson();
   }
+  componentDidUpdate (prevProps) {
+    if (this.props.personId !== prevProps.id) {
+      this.updatePerson();
+    }
+  }
+
+  onPersonLoaded = (person) => {
+    this.setState({
+      person,
+      loading: false
+    });
+  };
 
   componentDidUpdate (prevProps) {
     if (this.props.personId !== prevProps.id) {
@@ -30,14 +43,15 @@ export default class PersonDetails extends Component {
 
     this.swapiService
         .getPerson(personId)
-        .then((person) => {
-          this.setState({person});
-        })
+        .then(this.onPersonLoaded)
+        .catch(this.componentDidUpdate);
   }
 
   render() {
-    if (!this.state.person) {
-      return <span>Select a person</span>
+    const { person, loading }=this.state;
+
+    if (!person) {
+      return <span>Select a person from a list</span>
     }
 
     const { id, name, birthYear, gender, homeworld, skinColor,
@@ -85,13 +99,8 @@ export default class PersonDetails extends Component {
               <span className="term">Skin Color</span>
               <span>{skinColor}</span>
             </li>
-            <li className="list-group-item">
-              <span className="term">Home</span>
-              <span>{homeworld}</span>
-            </li>
           </ul>
         </div>
-      </div>
-    )
-  }
-}
+      </React.Fragment>
+  );
+};
