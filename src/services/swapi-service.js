@@ -61,6 +61,7 @@ export default class SwapiService {
     return {
       id: this._extractId(person),
       name: person.name,
+      gender: person.gender,
       birthYear: person.birth_year,
       eyeColor: person.eye_color,
       hairColor: person.hair_color,
@@ -68,7 +69,6 @@ export default class SwapiService {
       homeworld: person.homeworld,
       mass: person.mass,
       skinColor: person.skin_color,
-      edited: person.edited,
       species: person.species,
       starships: person.starships,
     }
