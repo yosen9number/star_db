@@ -2,18 +2,32 @@ import React, { Component } from 'react';
 
 import './person-details.css';
 import SwapiService from "../../services/swapi-service";
+import Spinner from "../spiner";
 
 export default class PersonDetails extends Component {
 
   swapiService = new SwapiService();
 
   state = {
-    person: null
+    person: null,
+    loading: true
   };
 
   componentDidMount () {
     this.updatePerson();
   }
+  componentDidUpdate (prevProps) {
+    if (this.props.personId !== prevProps.id) {
+      this.updatePerson();
+    }
+  }
+
+  onPersonLoaded = (person) => {
+    this.setState({
+      person,
+      loading: false
+    });
+  };
 
   componentDidUpdate (prevProps) {
     if (this.props.personId !== prevProps.id) {
@@ -29,25 +43,39 @@ export default class PersonDetails extends Component {
 
     this.swapiService
         .getPerson(personId)
-        .then((person) => {
-          this.setState({person});
-        })
+        .then(this.onPersonLoaded)
+        .catch(this.componentDidUpdate);
   }
 
   render() {
-    if (!this.state.person) {
-      return <span>Select a person</span>
+    const { person, loading }=this.state;
+
+    if (!person) {
+      return <span>Select a person from a list</span>
     }
 
-    const { id, name, birthYear, gender, homeworld, skinColor,
-      height, mass, hairColor, eyeColor, species, starships
-    } = this.state.person;
+    const spinner = loading ? <Spinner className="spinner"/> : null;
+    const content = !loading ? <PersonView person={person}/> : null;
 
     return (
       <div className="person-details card">
+        {spinner}
+        {content}
+      </div>
+    )
+  }
+}
+
+const PersonView = ({person}) => {
+
+  const { id, name, birthYear, gender, skinColor,
+    height, mass, hairColor, eyeColor } = person;
+
+  return (
+      <React.Fragment>
         <img className="person-image"
-          src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
-          alt={`Character: ${name}`}
+             src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
+             alt={`Character: ${name}`}
         />
 
         <div className="card-body">
@@ -81,21 +109,8 @@ export default class PersonDetails extends Component {
               <span className="term">Skin Color</span>
               <span>{skinColor}</span>
             </li>
-            <li className="list-group-item">
-              <span className="term">Home</span>
-              <span>{homeworld}</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">Species</span>
-              <span>{species}</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">Starships</span>
-              <span>{starships}</span>
-            </li>
           </ul>
         </div>
-      </div>
-    )
-  }
-}
+      </React.Fragment>
+  );
+};
