@@ -2,13 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f930ea97-49c5-4bab-b079-451baaa07117" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/people-page/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/people-page/people-page.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/people-page/people-page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/person-details/person-details.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/person-details/person-details.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/item-list/item-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/item-list/item-list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/people-page/people-page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/people-page/people-page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/person-details/person-details.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/person-details/person-details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/swapi-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/swapi-service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,14 +29,6 @@
         <option value="CSS File" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>person</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>starship</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -109,10 +102,23 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="440" y="190" key="#ESLint" timestamp="1584044970978">
+    <state x="440" y="190" key="#ESLint" timestamp="1584046001116">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="440" y="190" key="#ESLint/0.0.1680.1050@0.0.1680.1050" timestamp="1584044970978" />
+    <state x="440" y="190" key="#ESLint/0.0.1680.1050@0.0.1680.1050" timestamp="1584046001116" />
+    <state x="440" y="190" key="#Inspections" timestamp="1584048993693">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="440" y="190" key="#Inspections/0.0.1680.1050@0.0.1680.1050" timestamp="1584048993693" />
+    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1584047868337">
+      <screen x="0" y="23" width="1680" height="947" />
+    </state>
+    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1584047631648" />
+    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.23.1680.947@0.23.1680.947" timestamp="1584047868337" />
+    <state x="533" y="236" key="VCS.ChangeListViewerDialog" timestamp="1584047596238">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="533" y="236" key="VCS.ChangeListViewerDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1584047596238" />
     <state x="505" y="187" width="670" height="676" key="search.everywhere.popup" timestamp="1584031283263">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
