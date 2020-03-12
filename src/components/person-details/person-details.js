@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import './person-details.css';
 import SwapiService from "../../services/swapi-service";
+import ErrorButton from "../error-button";
 
 export default class PersonDetails extends Component {
 
@@ -40,15 +41,18 @@ export default class PersonDetails extends Component {
     }
 
     const { id, name, birthYear, gender, homeworld, skinColor,
-      height, mass, hairColor, eyeColor, species, starships
+      height, mass, hairColor, eyeColor
     } = this.state.person;
 
     return (
       <div className="person-details card">
-        <img className="person-image"
-          src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
-          alt={`Character: ${name}`}
-        />
+        <div className="left-col">
+          <img className="person-image"
+               src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
+               alt={`Character: ${name}`}
+          />
+          <ErrorButton className="error-button" />
+        </div>
 
         <div className="card-body">
           <h4>{name}</h4>
