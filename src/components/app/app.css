@@ -3,6 +3,11 @@
     max-width: 1200px;
     margin: auto;
 }
-.toggle-planet {
+
+.button-row{
     margin-bottom: 2rem;
+}
+
+.toggle-planet{
+    margin-right: 1rem;
 }

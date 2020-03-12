@@ -85,14 +85,6 @@ export default class PersonDetails extends Component {
               <span className="term">Home</span>
               <span>{homeworld}</span>
             </li>
-            <li className="list-group-item">
-              <span className="term">Species</span>
-              <span>{species}</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">Starships</span>
-              <span>{starships}</span>
-            </li>
           </ul>
         </div>
       </div>

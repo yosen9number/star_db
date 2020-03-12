@@ -1,16 +1,15 @@
 .error-indicator {
   width: 100%;
   display: flex;
-  font-size: 1.2rem;
   flex-direction: column;
   align-items: center;
-  color: #957300;
+  color: #953143;
 }
 
 .error-indicator img {
-  margin-bottom: 1.3rem;
+  margin-bottom: 1rem;
 }
 
 .error-indicator .boom {
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
