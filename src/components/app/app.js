@@ -8,9 +8,11 @@ import ErrorButton from '../error-button';
 import './app.css';
 import PeoplePage from "../people-page";
 import ItemList from "../item-list";
-import PersonDetails from "../person-details";
+import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi-service";
 import ErrorBoundry from "../error-boundry";
+import Row from "../row";
+import {Record} from "../item-details/item-details";
 
 export default class App extends Component {
     swapiService = new SwapiService();
@@ -36,26 +38,46 @@ export default class App extends Component {
 
     render() {
 
-        const planet = this.state.showRandomPlanet ?
-            <RandomPlanet/> :
-            null;
+        const { getPerson,
+            getStarship,
+            getPersonImage,
+            getStarshipImage} = this.swapiService;
+
+        const personDetails = (
+            <ItemDetails
+                itemId={11}
+                getData={getPerson}
+                getImageUrl={getPersonImage}
+            >
+                <Record field="gender" label="Gender" />
+                <Record field="birthYear" label="Birth Year" />
+                <Record field="height" label="Height" />
+                <Record field="eyeColor" label="Eye Color" />
+                <Record field="hairColor" label="Hair Color" />
+            </ItemDetails>
+        );
+
+        const starshipDetails = (
+            <ItemDetails
+                itemId={5}
+                getData={getStarship}
+                getImageUrl={getStarshipImage}
+            >
+                <Record field="model" label="Model" />
+                <Record field="length" label="Length" />
+                <Record field="passengers" label="Passengers" />
+                <Record field="starshipClass" label="Starship lass" />
+                <Record field="cost" label="Cost" />
+            </ItemDetails>
+            );
 
         return (
             <ErrorBoundry>
                 <div className="app">
                     <Header/>
-                    { planet }
 
-                    <div className="mb2 button-row">
-                        <button
-                            className="toggle-planet btn btn-warning btn-lg"
-                            onClick={this.toggleRandomPlanet}>
-                            Toggle Random Planet
-                        </button>
-                        <ErrorButton />
-                    </div>
+                    <Row left={personDetails} right={starshipDetails} />
 
-                    <PeoplePage />
                 </div>
             </ErrorBoundry>
         );

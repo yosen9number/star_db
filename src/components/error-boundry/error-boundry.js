@@ -10,7 +10,6 @@ export default class ErrorBoundry extends Component {
     };
 
     componentDidCatch (error, info) {
-        debugger;
         this.setState({
             hasError: true
         })
