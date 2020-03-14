@@ -10,13 +10,13 @@ import PeoplePage from "../people-page";
 import ItemList from "../item-list";
 import PersonDetails from "../person-details";
 import SwapiService from "../../services/swapi-service";
+import ErrorBoundry from "../error-boundry";
 
 export default class App extends Component {
     swapiService = new SwapiService();
 
     state = {
         showRandomPlanet: true,
-        hasError: false,
         selectedPerson: null
     };
 
@@ -34,38 +34,30 @@ export default class App extends Component {
         })
     };
 
-    componentDidCatch() {
-        console.log("didCatch");
-        this.setState({ hasError: true });
-    }
-
     render() {
-
-        if (this.state.hasError) {
-            return <ErrorIndicator />
-        }
 
         const planet = this.state.showRandomPlanet ?
             <RandomPlanet/> :
             null;
 
         return (
-            <div className="app">
-                <Header/>
-                { planet }
+            <ErrorBoundry>
+                <div className="app">
+                    <Header/>
+                    { planet }
 
-                <div className="mb2 button-row">
-                    <button
-                        className="toggle-planet btn btn-warning btn-lg"
-                        onClick={this.toggleRandomPlanet}>
-                        Toggle Random Planet
-                    </button>
-                    <ErrorButton />
+                    <div className="mb2 button-row">
+                        <button
+                            className="toggle-planet btn btn-warning btn-lg"
+                            onClick={this.toggleRandomPlanet}>
+                            Toggle Random Planet
+                        </button>
+                        <ErrorButton />
+                    </div>
+
+                    <PeoplePage />
                 </div>
-
-                <PeoplePage />
-
-            </div>
+            </ErrorBoundry>
         );
     }
 };
