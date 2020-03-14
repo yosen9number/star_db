@@ -71,13 +71,23 @@ export default class App extends Component {
             </ItemDetails>
             );
 
+        const itemList = (
+            <ItemList
+                onItemSelected={this.onPersonSelected}
+                getData={this.swapiService.getAllPeople}
+            >
+                {(i) => (
+                    `${i.name}  ${i.birthYear})`
+                )}
+            </ItemList>
+        );
+
         return (
             <ErrorBoundry>
                 <div className="app">
                     <Header/>
-
                     <Row left={personDetails} right={starshipDetails} />
-
+                    <Row left={itemList} right={itemList} />
                 </div>
             </ErrorBoundry>
         );
