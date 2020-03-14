@@ -1,6 +1,6 @@
 import React from "react";
 
-import './people-page.css';
+import './row.css';
 
 
 const Row = ({left, right}) => {

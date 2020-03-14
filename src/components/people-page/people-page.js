@@ -11,7 +11,7 @@ export default class PeoplePage extends Component{
     swapiService = new SwapiService();
 
     state={
-        selectedPerson: 5,
+        selectedPerson: 2,
         hasError: false
     };
 
@@ -38,8 +38,11 @@ export default class PeoplePage extends Component{
             <ItemList
                 onItemSelected={this.onPersonSelected}
                 getData={this.swapiService.getAllPeople}
-                renderItem={({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})`}
-            />
+            >
+                {(i) => (
+                    `${i.name}  ${i.birthYear})`
+                )}
+            </ItemList>
         );
 
         const personDetails = (
