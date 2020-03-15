@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import './item-list.css';
-import Spinner from "../spiner";
 
 const ItemList = (props) => {
 
