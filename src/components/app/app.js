@@ -4,6 +4,7 @@ import Header from '../header';
 
 import './app.css';
 import SwapiService from "../../services/swapi-service";
+import DummySwapiService from "../../services/dummy-swapi-service";
 import ErrorBoundry from "../error-boundry";
 
 import {SwapiServiceProvider} from "../swapi-service-context";
@@ -12,11 +13,22 @@ import {PersonDetails, PersonList, PlanetDetails, PlanetList, StarshipDetails, S
 import Row from "../row";
 
 export default class App extends Component {
-    swapiService = new SwapiService();
 
     state = {
         showRandomPlanet: true,
-        selectedPerson: null
+        swapiService: new SwapiService()
+    };
+
+    onServiceChange = () => {
+        this.setState(({swapiService}) => {
+            const Service = swapiService instanceof SwapiService ?
+            DummySwapiService : SwapiService;
+            console.log('swith to'+ Service.name);
+
+            return {
+                swapiService: new Service()
+            };
+        });
     };
 
     toggleRandomPlanet = () => {
@@ -27,18 +39,12 @@ export default class App extends Component {
         });
     };
 
-    onPersonSelected = (id) => {
-        this.setState({
-            selectedPerson: id
-        })
-    };
-
     render() {
         return (
             <ErrorBoundry>
-                <SwapiServiceProvider value={this.swapiService}>
+                <SwapiServiceProvider value={this.state.swapiService}>
                     <div className="app">
-                        <Header/>
+                        <Header onServiceChange={this.onServiceChange} />
 
                         <Row
                             left={<PersonList onItemSelected={() => {}} />}

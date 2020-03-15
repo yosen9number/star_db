@@ -1,5 +1,6 @@
 .header {
   margin-top: .5rem;
+  margin-bottom: .5rem;
   padding-left: 10px;
 }
 
@@ -24,4 +25,9 @@
 
 .header h3 a:hover {
   color: #00bc8c;
+}
+
+.header button {
+  height: 2rem;
+  margin-top: 3px;
 }
