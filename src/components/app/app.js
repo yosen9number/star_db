@@ -1,18 +1,12 @@
 import React, {Component} from 'react';
 
 import Header from '../header';
-import RandomPlanet from '../random-planet';
-import ErrorIndicator from '../error-indicator';
-import ErrorButton from '../error-button';
 
 import './app.css';
-import PeoplePage from "../people-page";
-import ItemList from "../item-list";
-import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi-service";
 import ErrorBoundry from "../error-boundry";
-import Row from "../row";
-import {Record} from "../item-details/item-details";
+
+import {PersonDetails, PersonList, PlanetDetails, PlanetList, StarshipDetails, StarshipList} from "../sw-components";
 
 export default class App extends Component {
     swapiService = new SwapiService();
@@ -37,57 +31,27 @@ export default class App extends Component {
     };
 
     render() {
-
-        const { getPerson,
-            getStarship,
-            getPersonImage,
-            getStarshipImage} = this.swapiService;
-
-        const personDetails = (
-            <ItemDetails
-                itemId={11}
-                getData={getPerson}
-                getImageUrl={getPersonImage}
-            >
-                <Record field="gender" label="Gender" />
-                <Record field="birthYear" label="Birth Year" />
-                <Record field="height" label="Height" />
-                <Record field="eyeColor" label="Eye Color" />
-                <Record field="hairColor" label="Hair Color" />
-            </ItemDetails>
-        );
-
-        const starshipDetails = (
-            <ItemDetails
-                itemId={5}
-                getData={getStarship}
-                getImageUrl={getStarshipImage}
-            >
-                <Record field="model" label="Model" />
-                <Record field="length" label="Length" />
-                <Record field="passengers" label="Passengers" />
-                <Record field="starshipClass" label="Starship lass" />
-                <Record field="cost" label="Cost" />
-            </ItemDetails>
-            );
-
-        const itemList = (
-            <ItemList
-                onItemSelected={this.onPersonSelected}
-                getData={this.swapiService.getAllPeople}
-            >
-                {(i) => (
-                    `${i.name}  ${i.birthYear})`
-                )}
-            </ItemList>
-        );
-
         return (
             <ErrorBoundry>
                 <div className="app">
                     <Header/>
-                    <Row left={personDetails} right={starshipDetails} />
-                    <Row left={itemList} right={itemList} />
+
+                    <PersonList onItemSelected={() => {}}>
+                        { ({name}) => <span>{name}</span> }
+                    </PersonList>
+
+                    <PlanetList onItemSelected={() => {}}>
+                        { ({name}) => <span>{name}</span> }
+                    </PlanetList>
+
+                    <StarshipList onItemSelected={() => {}}>
+                        { ({name}) => <span>{name}</span> }
+                    </StarshipList>
+
+                    <PersonDetails itemId={5} />
+                    <PlanetDetails itemId={5} />
+                    <StarshipDetails itemId={5} />
+
                 </div>
             </ErrorBoundry>
         );
