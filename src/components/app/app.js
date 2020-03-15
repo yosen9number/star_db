@@ -1,21 +1,34 @@
 import React, {Component} from 'react';
 
 import Header from '../header';
-import RandomPlanet from '../random-planet';
-import ItemList from '../item-list';
-import PersonDetails from '../person-details';
-import ErrorIndicator from '../error-indicator';
-import ErrorButton from '../error-button';
 
 import './app.css';
-import PeoplePage from "../people-page";
+import SwapiService from "../../services/swapi-service";
+import DummySwapiService from "../../services/dummy-swapi-service";
+import ErrorBoundry from "../error-boundry";
+
+import {SwapiServiceProvider} from "../swapi-service-context";
+
+import {PersonDetails, PersonList, PlanetDetails, PlanetList, StarshipDetails, StarshipList} from "../sw-components";
+import Row from "../row";
 
 export default class App extends Component {
 
     state = {
         showRandomPlanet: true,
-        hasError: false,
-        selectedPerson: null
+        swapiService: new SwapiService()
+    };
+
+    onServiceChange = () => {
+        this.setState(({swapiService}) => {
+            const Service = swapiService instanceof SwapiService ?
+            DummySwapiService : SwapiService;
+            console.log('swith to'+ Service.name);
+
+            return {
+                swapiService: new Service()
+            };
+        });
     };
 
     toggleRandomPlanet = () => {
@@ -26,47 +39,30 @@ export default class App extends Component {
         });
     };
 
-    onPersonSelected = (id) => {
-        this.setState({
-            selectedPerson: id
-        })
-    };
-
-    componentDidCatch() {
-        console.log("didCatch");
-        this.setState({ hasError: true });
-    }
-
     render() {
-
-        if (this.state.hasError) {
-            return <ErrorIndicator />
-        }
-
-        const planet = this.state.showRandomPlanet ?
-            <RandomPlanet/> :
-            null;
-
         return (
-            <div className="app">
-                <Header/>
-                { planet }
+            <ErrorBoundry>
+                <SwapiServiceProvider value={this.state.swapiService}>
+                    <div className="app">
+                        <Header onServiceChange={this.onServiceChange} />
 
-                <div className="mb2 button-row">
-                    <button
-                        className="toggle-planet btn btn-warning btn-lg"
-                        onClick={this.toggleRandomPlanet}>
-                        Toggle Random Planet
-                    </button>
-                    <ErrorButton />
-                </div>
+                        <Row
+                            left={<PersonList onItemSelected={() => {}} />}
+                            right={<PersonDetails itemId={5} />}
+                        />
 
-                <PeoplePage />
+                        <Row
+                            left={<PlanetList onItemSelected={() => {}} />}
+                            right={<PlanetDetails itemId={5} />}
+                        />
 
-                <PeoplePage />
-
-                <PeoplePage />
-            </div>
+                        <Row
+                            left={<StarshipList onItemSelected={() => {}} />}
+                            right={<StarshipDetails itemId={5} />}
+                        />
+                    </div>
+                </SwapiServiceProvider>
+            </ErrorBoundry>
         );
     }
 };
