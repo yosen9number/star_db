@@ -7,6 +7,7 @@ import SwapiService from "../../services/swapi-service";
 import ErrorBoundry from "../error-boundry";
 
 import {PersonDetails, PersonList, PlanetDetails, PlanetList, StarshipDetails, StarshipList} from "../sw-components";
+import Row from "../row";
 
 export default class App extends Component {
     swapiService = new SwapiService();
@@ -36,22 +37,20 @@ export default class App extends Component {
                 <div className="app">
                     <Header/>
 
-                    <PersonList onItemSelected={() => {}}>
-                        { ({name}) => <span>{name}</span> }
-                    </PersonList>
+                    <Row
+                        left={<PersonList onItemSelected={() => {}} />}
+                        right={<PersonDetails itemId={5} />}
+                    />
 
-                    <PlanetList onItemSelected={() => {}}>
-                        { ({name}) => <span>{name}</span> }
-                    </PlanetList>
+                    <Row
+                        left={<PlanetList onItemSelected={() => {}} />}
+                        right={<PlanetDetails itemId={5} />}
+                    />
 
-                    <StarshipList onItemSelected={() => {}}>
-                        { ({name}) => <span>{name}</span> }
-                    </StarshipList>
-
-                    <PersonDetails itemId={5} />
-                    <PlanetDetails itemId={5} />
-                    <StarshipDetails itemId={5} />
-
+                    <Row
+                        left={<StarshipList onItemSelected={() => {}} />}
+                        right={<StarshipDetails itemId={5} />}
+                    />
                 </div>
             </ErrorBoundry>
         );
