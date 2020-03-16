@@ -14,7 +14,6 @@ const widthChildFunction = (Wrapped, fn) => {
 };
 
 const renderName = ({name}) => <span>{name}</span>;
-// const renderModelAndName = ({name, model}) => <span>{name} ({model})</span>;
 
 const mapPesonMethodsToProps = (swapiService) => {
     return { getData: swapiService.getAllPeople };

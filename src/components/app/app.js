@@ -9,8 +9,10 @@ import ErrorBoundry from "../error-boundry";
 
 import {SwapiServiceProvider} from "../swapi-service-context";
 
-import {PersonDetails, PersonList, PlanetDetails, PlanetList, StarshipDetails, StarshipList} from "../sw-components";
-import Row from "../row";
+import RandomPlanet from "../random-planet";
+import PeoplePage from "../pages/people-page";
+import PlanetsPage from "../pages/planets-page";
+import StarshipsPage from "../pages/starships-page";
 
 export default class App extends Component {
 
@@ -23,7 +25,6 @@ export default class App extends Component {
         this.setState(({swapiService}) => {
             const Service = swapiService instanceof SwapiService ?
             DummySwapiService : SwapiService;
-            console.log('swith to'+ Service.name);
 
             return {
                 swapiService: new Service()
@@ -31,35 +32,21 @@ export default class App extends Component {
         });
     };
 
-    toggleRandomPlanet = () => {
-        this.setState((state) => {
-            return {
-                showRandomPlanet: !state.showRandomPlanet
-            }
-        });
-    };
-
     render() {
+
+        const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
+
         return (
             <ErrorBoundry>
                 <SwapiServiceProvider value={this.state.swapiService}>
                     <div className="app">
                         <Header onServiceChange={this.onServiceChange} />
 
-                        <Row
-                            left={<PersonList onItemSelected={() => {}} />}
-                            right={<PersonDetails itemId={5} />}
-                        />
+                        {planet}
 
-                        <Row
-                            left={<PlanetList onItemSelected={() => {}} />}
-                            right={<PlanetDetails itemId={5} />}
-                        />
-
-                        <Row
-                            left={<StarshipList onItemSelected={() => {}} />}
-                            right={<StarshipDetails itemId={5} />}
-                        />
+                        <PeoplePage />
+                        <PlanetsPage />
+                        <StarshipsPage />
                     </div>
                 </SwapiServiceProvider>
             </ErrorBoundry>
