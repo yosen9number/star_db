@@ -50,7 +50,6 @@ export default class ItemDetails extends Component {
               item,
               image: getImageUrl(item)
             });
-            console.log(item, getImageUrl(item));
           });
   }
 
